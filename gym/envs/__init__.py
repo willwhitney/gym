@@ -232,6 +232,27 @@ register(
 )
 
 register(
+    id='ReacherVerticalSparse-v2',
+    entry_point='gym.envs.mujoco:ReacherVerticalSparseEnv',
+    max_episode_steps=100,
+    # reward_threshold=-3.75,
+)
+
+register(
+    id='ReacherPushSparse-v2',
+    entry_point='gym.envs.mujoco:ReacherPushSparseEnv',
+    max_episode_steps=100,
+    # reward_threshold=-3.75,
+)
+
+register(
+    id='ReacherSpinSparse-v2',
+    entry_point='gym.envs.mujoco:ReacherSpinSparseEnv',
+    max_episode_steps=100,
+    # reward_threshold=-3.75,
+)
+
+register(
     id='Pusher-v2',
     entry_point='gym.envs.mujoco:PusherEnv',
     max_episode_steps=100,

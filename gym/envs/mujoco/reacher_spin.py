@@ -48,4 +48,4 @@ class ReacherSpinSparseEnv(ReacherSpinEnv):
         self.do_simulation(a, self.frame_skip)
         ob = self._get_obs()
         done = False
-        return ob, reward, done, dict(reward_dist=reward_dist, reward_ctrl=reward_ctrl)
+        return ob, reward, done, dict()
