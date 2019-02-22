@@ -8,8 +8,6 @@ class ReacherSpinEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         mujoco_env.MujocoEnv.__init__(self, 'reacher_spin.xml', 2)
 
     def step(self, a):
-        # vec = self.get_body_com("fingertip")-self.get_body_com("target")
-        # import ipdb; ipdb.set_trace()
         reward_speed = self.sim.data.qvel[-1]
         reward_ctrl = - 0.1 * np.square(a).sum()
         reward = reward_speed + reward_ctrl
@@ -37,7 +35,17 @@ class ReacherSpinEnv(mujoco_env.MujocoEnv, utils.EzPickle):
             np.cos(theta),
             np.sin(theta),
             self.sim.data.qpos.flat[2:],
-            self.model.body_pos[-1, (-3, -1)],    # target's (x, z) coords
+            # self.model.body_pos[-1, (-3, -1)],    # target's (x, z) coords
             self.sim.data.qvel.flat,
             # self.get_body_com("fingertip") - self.get_body_com("target")
         ])
+
+class ReacherSpinSparseEnv(ReacherSpinEnv):
+    def step(self, a):
+        # reward_dist = np.linalg.norm(vec)
+        # reward_ctrl = - 0.1 * np.square(a).sum()
+        reward = 1 if self.sim.data.qvel[-1] > 1 else 0
+        self.do_simulation(a, self.frame_skip)
+        ob = self._get_obs()
+        done = False
+        return ob, reward, done, dict(reward_dist=reward_dist, reward_ctrl=reward_ctrl)

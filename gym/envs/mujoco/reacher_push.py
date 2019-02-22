@@ -46,5 +46,14 @@ class ReacherPushEnv(mujoco_env.MujocoEnv, utils.EzPickle):
             self.sim.data.qpos.flat[2:],
             self.model.body_pos[-1, (-3, -1)],    # target's (x, z) coords
             self.sim.data.qvel.flat,
-            self.get_body_com("fingertip") - self.get_body_com("target")
+            # self.get_body_com("fingertip") - self.get_body_com("target")
         ])
+
+class ReacherPushSparseEnv(ReacherPushEnv):
+    def step(self, a):
+        box_vec = self.get_body_com("box0") - self.get_body_com("target")
+        reward = 1 if np.linalg.norm(box_vec) < 0.05 else 0
+        self.do_simulation(a, self.frame_skip)
+        ob = self._get_obs()
+        done = False
+        return ob, reward, done, dict(reward_dist=reward_dist, reward_ctrl=reward_ctrl)
