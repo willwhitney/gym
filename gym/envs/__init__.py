@@ -211,6 +211,27 @@ register(
 )
 
 register(
+    id='ReacherVertical-v2',
+    entry_point='gym.envs.mujoco:ReacherVerticalEnv',
+    max_episode_steps=100,
+    # reward_threshold=-3.75,
+)
+
+register(
+    id='ReacherPush-v2',
+    entry_point='gym.envs.mujoco:ReacherPushEnv',
+    max_episode_steps=100,
+    # reward_threshold=-3.75,
+)
+
+register(
+    id='ReacherSpin-v2',
+    entry_point='gym.envs.mujoco:ReacherSpinEnv',
+    max_episode_steps=100,
+    # reward_threshold=-3.75,
+)
+
+register(
     id='Pusher-v2',
     entry_point='gym.envs.mujoco:PusherEnv',
     max_episode_steps=100,
@@ -551,4 +572,3 @@ register(
     entry_point='gym.envs.unittest:MemorizeDigits',
     reward_threshold=20,
     )
-
