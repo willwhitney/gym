@@ -18,3 +18,4 @@ from gym.envs.mujoco.striker import StrikerEnv
 from gym.envs.mujoco.reacher_push import ReacherPushEnv, ReacherPushSparseEnv
 from gym.envs.mujoco.reacher_vertical import ReacherVerticalEnv, ReacherVerticalSparseEnv
 from gym.envs.mujoco.reacher_spin import ReacherSpinEnv, ReacherSpinSparseEnv
+from gym.envs.mujoco.reacher_test import ReacherTestEnv, ReacherTestSparseEnv

@@ -218,6 +218,20 @@ register(
 )
 
 register(
+    id='ReacherTest-v2',
+    entry_point='gym.envs.mujoco:ReacherTestEnv',
+    max_episode_steps=100,
+    # reward_threshold=-3.75,
+)
+
+register(
+    id='ReacherTestSparse-v2',
+    entry_point='gym.envs.mujoco:ReacherTestSparseEnv',
+    max_episode_steps=100,
+    # reward_threshold=-3.75,
+)
+
+register(
     id='ReacherPush-v2',
     entry_point='gym.envs.mujoco:ReacherPushEnv',
     max_episode_steps=100,
