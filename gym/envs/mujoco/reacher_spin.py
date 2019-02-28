@@ -31,13 +31,15 @@ class ReacherSpinEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
     def _get_obs(self):
         theta = self.sim.data.qpos.flat[:2]
+        # use the xpos of the tip instead of the hinge qpos
+        # because when the spinner spins, the qpos will go arbitrarily large
         return np.concatenate([
             np.cos(theta),
             np.sin(theta),
-            self.sim.data.qpos.flat[2:],
+            # self.sim.data.qpos.flat[2:],
             # self.model.body_pos[-1, (-3, -1)],    # target's (x, z) coords
             self.sim.data.qvel.flat,
-            # self.get_body_com("fingertip") - self.get_body_com("target")
+            self.sim.data.site_xpos[0, (0,2)], # cartesian position of tip of spinner
         ])
 
 class ReacherSpinSparseEnv(ReacherSpinEnv):
